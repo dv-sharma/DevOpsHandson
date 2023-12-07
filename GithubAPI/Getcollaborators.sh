@@ -22,9 +22,9 @@ GITHUB_REPO_NAME=$2
 #### Creating a function to make the REST API hit
 
 
-GITHUB_API_URL=   "https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO_NAME}/collaborators"
+GITHUB_API_URL="https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO_NAME}/collaborators"
 
-response= $(curl -s -H "Authorization: token ${TOKEN}" "${GITHUB_API_URL}")
+response=$(curl -s -H "Authorization: token ${TOKEN}" "${GITHUB_API_URL}")
 
 if [ $? -ne 0 ]; then
     echo "Error: Unable to fetch collaborators. Please check your GitHub token and repository name."
@@ -34,6 +34,3 @@ collaborators=$(echo "${response}" | jq -r '.[].login')
 
 echo "Collaborators for ${GITHUB_REPO_NAME}:"
 echo "${collaborators}"
-
-
-
